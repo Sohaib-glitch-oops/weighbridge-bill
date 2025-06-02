@@ -44,8 +44,11 @@ export async function generatePdfService(req: NextRequest) {
 
         // Launch the browser in production or development mode depending on the environment
         if (ENV === "production") {
-            const puppeteer = await import("puppeteer-core");
-            browser = await puppeteer.launch({
+            const chromium = require('@sparticuz/chromium');
+            const puppeteer = require("puppeteer-core");
+
+        
+            const browser = await puppeteer.launch({
                  args: chromium.args,
                 defaultViewport: chromium.defaultViewport,
                 executablePath: await chromium.executablePath(
